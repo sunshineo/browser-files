@@ -12,12 +12,36 @@ class FileList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      files: props.currentFolder.children
+      files: this.calculateFiles(props)
     }
   }
 
+  calculateFiles(props) {
+    const currentFolderId = props.currentFolderId
+    const allItems = props.allItems
+
+    const currentFolder = allItems[currentFolderId]
+    const childIds = currentFolder.childIds
+    const children = childIds.map((childId) => {
+      return allItems[childId]
+    })
+    return children
+  }
+
   componentWillReceiveProps(nextProps) {
-    this.setState({ files: nextProps.currentFolder.children })
+    this.setState({ files: this.calculateFiles(nextProps) })
+  }
+
+  handleRename(file) {
+    const newName = prompt("Enter the new name?");
+    this.props.renameItem(file.id, newName)
+  }
+
+  handleDelete(file) {
+    const anwser = window.confirm("Are you sure?");
+    if (anwser) {
+      this.props.deleteItem(file.id)
+    }
   }
 
   render() {
@@ -37,8 +61,8 @@ class FileList extends Component {
                 {file.name}
               </ListGroupItem>
             }
-              <Button bsStyle="primary" onClick={() => this.props.rename(file)}>Rename</Button>
-              <Button bsStyle="danger" onClick={() => this.props.delete(file)}>Delete</Button>
+              <Button bsStyle="primary" onClick={() => this.handleRename(file)}>Rename</Button>
+              <Button bsStyle="danger" onClick={() => this.handleDelete(file)}>Delete</Button>
             </div>
           ))}
         </ListGroup>
@@ -49,9 +73,10 @@ class FileList extends Component {
 
 FileList.propTypes = {
   gotoFolder: PropTypes.func,
-  rename: PropTypes.func,
-  delete: PropTypes.func,
-  currentFolder: PropTypes.object
+  renameItem: PropTypes.func,
+  deleteItem: PropTypes.func,
+  currentFolderId: PropTypes.string,
+  allItems: PropTypes.object
 }
 
 export default FileList

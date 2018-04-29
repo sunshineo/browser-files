@@ -16,10 +16,12 @@ class CurrentPath extends Component {
 
   calculatePath(props) {
     const path = []
-    let pointer = props.currentFolder
+    const allItems = props.allItems
+    const currentFolderId = props.currentFolderId
+    let pointer = allItems[currentFolderId]
     while(pointer != null) {
       path.unshift(pointer)
-      pointer = props.allItems[pointer.parentId]
+      pointer = allItems[pointer.parentId]
     }
     return path
   }
