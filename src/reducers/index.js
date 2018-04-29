@@ -16,11 +16,15 @@ const initialState = {
 }
 
 const createItem = (state, action) => {
+  const name = action.name
+  if (!name || name.trim().length === 0) {
+    return state
+  }
   const newItemId = uuidv4()
   const parentId = action.parentId
   const newItem = {
     id: newItemId,
-    name: action.name,
+    name: name,
     isFolder: action.isFolder,
     parentId: parentId,
     childIds: []
@@ -47,7 +51,7 @@ const deleteItem = (state, action) => {
   const newAllItems = Object.assign({}, newState.allItems)
   const newParent = Object.assign({}, newAllItems[parentId])
   const newChildIds = newParent.childIds
-    .filter((childId) => { return childId != id })
+    .filter((childId) => { return childId !== id })
     .map((childId) => { return childId })
   newParent.childIds = newChildIds
   delete newAllItems[id]
@@ -60,6 +64,9 @@ const renameItem = (state, action) => {
   console.log(action)
   const id = action.id
   const name = action.name
+  if (!name || name.trim().length === 0) {
+    return state
+  }
 
   const newState = Object.assign({}, state)
   const newAllItems = Object.assign({}, newState.allItems)

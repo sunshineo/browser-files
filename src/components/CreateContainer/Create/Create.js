@@ -21,7 +21,6 @@ class Create extends Component {
   }
 
   handleCreateItem(isFolder) {
-    console.log(isFolder)
     const name = this.state.name
     const parentId = this.props.currentFolderId
     this.props.createItem(parentId, name, isFolder)

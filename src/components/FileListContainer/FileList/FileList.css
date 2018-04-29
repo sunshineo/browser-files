@@ -2,6 +2,7 @@
   text-align: left;
 }
 .file-list-item {
+  padding: 6px 10px;
   float: left;
   width: 80% !important;
 }

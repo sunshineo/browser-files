@@ -7,6 +7,7 @@ npm install
 npm start
 ```
 ## Improvements in the future
+* Better error handling for empty names
 * Break apart reducers and use reducer composistion
 * Break apart action creators and put action type strings in constant
 * Async actions to talk to backend service
