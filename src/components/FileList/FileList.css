@@ -1,0 +1,7 @@
+.file-list-div {
+  text-lign: left;
+}
+.file-list-item {
+  float: left;
+  width: 80% !important;
+}
