@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Nav,
   NavItem
@@ -39,6 +40,12 @@ class CurrentPath extends Component {
       </Nav>
     );
   }
+}
+
+CurrentPath.propTypes = {
+  gotoFolder: PropTypes.func,
+  currentFolder: PropTypes.object,
+  allItems: PropTypes.object
 }
 
 export default CurrentPath

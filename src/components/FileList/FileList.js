@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   ListGroup,
   ListGroupItem,
@@ -44,6 +45,13 @@ class FileList extends Component {
       </div>
     )
   }
+}
+
+FileList.propTypes = {
+  gotoFolder: PropTypes.func,
+  rename: PropTypes.func,
+  delete: PropTypes.func,
+  currentFolder: PropTypes.object
 }
 
 export default FileList

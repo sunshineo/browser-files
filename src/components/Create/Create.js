@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Form,
   FormControl,
@@ -40,6 +41,10 @@ class Create extends Component {
       </Form>
     );
   }
+}
+
+Create.propTypes = {
+  createNewItem: PropTypes.func
 }
 
 export default Create
